@@ -1,9 +1,10 @@
 package com.wamaithajoy.workoutlog
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
+import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -13,16 +14,26 @@ class Login : AppCompatActivity() {
     lateinit var tilpassword:TextInputLayout
     lateinit var etEmail: TextInputEditText
     lateinit var etpassword:TextInputEditText
+    lateinit var tvSignUp: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+       castviews()
+
+    }
+    fun castviews(){
         btnLogin=findViewById(R.id.btnlogin)
         tilEmail=findViewById(R.id.tilEmail)
         tilpassword=findViewById(R.id.tilpassword)
         etEmail=findViewById(R.id.etEmail)
         etpassword=findViewById(R.id.etpassword)
+        tvSignUp=findViewById(R.id.tvSignUp)
 
         btnLogin.setOnClickListener { validateLogin() }
+        tvSignUp.setOnClickListener {
+            val intent=Intent(this,SignUp::class.java)
+            startActivity(intent)
+        }
 
     }
     fun validateLogin(){
