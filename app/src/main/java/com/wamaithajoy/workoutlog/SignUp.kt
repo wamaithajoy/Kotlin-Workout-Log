@@ -3,6 +3,7 @@ package com.wamaithajoy.workoutlog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
@@ -10,13 +11,13 @@ import com.google.android.material.textfield.TextInputLayout
 
 class SignUp : AppCompatActivity() {
     lateinit var tilFirstName:TextInputLayout
-    lateinit var etFirstName: TextInputEditText
-    lateinit var tilLastName: TextInputLayout
-    lateinit var etLastName: TextInputEditText
-    lateinit var tilEmailAddress: TextInputLayout
-    lateinit var etEmailAddress: TextInputEditText
-    lateinit var tilPassword: TextInputLayout
-    lateinit var etPassword: TextInputEditText
+    lateinit var etFirstName:TextInputEditText
+    lateinit var tilLastName:TextInputLayout
+    lateinit var etLastName:TextInputEditText
+    lateinit var tilEmailAddress:TextInputLayout
+    lateinit var etEmailAddress:TextInputEditText
+    lateinit var tilPassword:TextInputLayout
+    lateinit var etPassword:TextInputEditText
     lateinit var tilConfirmPassword: TextInputLayout
     lateinit var etConfirmPassword: TextInputEditText
     lateinit var btnSignUp:Button
@@ -64,6 +65,11 @@ class SignUp : AppCompatActivity() {
         var email=etEmailAddress.text.toString()
         if (email.isBlank()){
             tilEmailAddress.error="Email is required"
+            error=true
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            tilEmailAddress.error="Not a valid email"
+            error=true
         }
         var password=etPassword.text.toString()
         if (password.isBlank()){
@@ -74,8 +80,9 @@ class SignUp : AppCompatActivity() {
             tilConfirmPassword.error="Confirm password is required"
         }
         var equals=etPassword==etConfirmPassword
-        if(etPassword!=etConfirmPassword){
-            tilConfirmPassword.error="Wrong Password"
+
+        if(password!=confirmpassword){
+            tilConfirmPassword.error="Wrong password"
         }
     }
 }
